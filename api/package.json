@@ -9,8 +9,9 @@
 		"start:prod": "NODE_ENV=prod ts-node src/server.ts",
 		"db:push": "pnpm prisma db push",
 		"db:seed": "ts-node src/database/seed.ts",
-		"compose": "docker compose up -d mysql",
-		"prisma:studio": "pnpm prisma studio"
+		"compose": "docker compose up -d",
+		"prisma:studio": "pnpm prisma studio",
+		"build": "npx tsc"
 	},
 	"keywords": [],
 	"author": "",

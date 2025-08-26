@@ -1,6 +1,6 @@
 datasource db {
-  provider = "mysql"
-  url      = "mysql://root:123456@localhost:3306/lara_health"
+  provider = "postgresql"
+  url      = "postgres://postgres:123456@localhost:5432/lara_health"
 }
 
 generator client {
