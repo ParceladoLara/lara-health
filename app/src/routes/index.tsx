@@ -17,7 +17,7 @@ function RouteComponent() {
     setLoading(true);
 
     const response = await fetch(
-      "https://api-teste-deploy-4rglo.ondigitalocean.app/graphql",
+      "https://dev.gql.parceladolara.com.br/graphql",
       {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ function RouteComponent() {
             data: { login, password },
           },
         }),
-      }
+      },
     );
 
     const result = await response.json();

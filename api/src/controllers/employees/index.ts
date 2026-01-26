@@ -13,7 +13,7 @@ export class EmployeeController {
 
   public createEmployee = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     const data: CreateEmployeeDTO = req.body;
 
@@ -27,12 +27,12 @@ export class EmployeeController {
 
   public getEmployee = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     const { search } = req.params;
 
     try {
-      const employee = await this.getEmployeeService.execute(search);
+      const employee = await this.getEmployeeService.execute(search as string);
       return res.status(200).json(employee);
     } catch (error) {
       return res.status(500).json({ error });
@@ -41,7 +41,7 @@ export class EmployeeController {
 
   public listEmployees = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     try {
       const employees = await this.listEmployeesService.execute();

@@ -16,7 +16,7 @@ function RouteComponent() {
   const [URL, setURL] = useState<string | null>(null);
 
   useEffect(() => {
-    const companyDocument = "17203865000158";
+    const companyDocument = "36931849000126";
     const ssoId = 1;
 
     loginWithSSO({ documentNumber: companyDocument, ssoId })

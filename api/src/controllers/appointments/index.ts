@@ -31,7 +31,7 @@ export class AppointmentController {
     const { id } = req.params;
 
     try {
-      const employee = await this.getService.execute(id);
+      const employee = await this.getService.execute(id as string);
       return res.status(200).json(employee);
     } catch (error) {
       return res.status(500).json({ error });
@@ -49,7 +49,7 @@ export class AppointmentController {
 
   public updateValue = async (
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> => {
     const data: UpdateAppointmentValueDTO = req.body;
 

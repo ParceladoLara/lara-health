@@ -84,7 +84,7 @@ export class GatekeeperController {
     // 🔹 Gera o token da Platform
     const jwt = await this.platformLoginService.execute(
       { ssoId: employee.lara_id },
-      company.apiKey
+      company.apiKey,
     );
 
     return res.status(200).json({

@@ -1,5 +1,4 @@
 import { Employee, PrismaClient } from "@prisma/client";
-import type { CreateEmployeeDTO } from "../employees/create";
 import { JWTIssuer } from "./builder";
 
 export class SetEmployeeLaraIdService {
@@ -30,7 +29,7 @@ export class SetEmployeeLaraIdService {
       body: JSON.stringify(rest),
     });
 
-    const json = await response.json();
+    const json = (await response.json()) as { data: string };
     const laraId = json.data;
 
     await this.prisma.employee.updateMany({

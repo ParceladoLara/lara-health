@@ -9,9 +9,9 @@ async function main() {
     update: {}, // não muda nada se já existir
     create: {
       id: 1,
-      cnpj: "17203865000158",
+      cnpj: "36931849000126",
       name: "Memhis & Pay",
-      apiKey: "608badeb-7a27-4c11-ae05-0e83898211b3",
+      apiKey: "80fcf64e-bd3b-4835-afea-954b83ecb0c2",
     },
   });
 
@@ -24,7 +24,7 @@ async function main() {
       cellphone: "5582996138682",
       cpf: "09606305465",
       dateOfBirth: "2002-08-13 06:00:00.000",
-      lara_id: "46033b0c-a4ea-498d-b3a0-381fbaef4a66",
+      lara_id: "599bf2d5-6c3b-4e23-a6a5-5890e39392c0",
       company_id: 1,
     },
   });

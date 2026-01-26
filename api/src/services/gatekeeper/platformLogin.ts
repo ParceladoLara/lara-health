@@ -32,7 +32,7 @@ export class PlatformLoginService {
       body: JSON.stringify(data),
     });
 
-    const json = await response.json();
+    const json = (await response.json()) as { data: string };
 
     return json.data;
   }
