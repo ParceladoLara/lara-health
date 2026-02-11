@@ -1,17 +1,14 @@
-import { Appointment, PrismaClient } from "@prisma/client";
+import type { Appointment } from "../../../prisma/generated/client";
+import { prisma } from "../../database/client";
 
 export class ListAppointmentsService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute(): Promise<Appointment[]> {
+		const response = await this.prisma.appointment.findMany({
+			include: { patient: true },
+		});
 
-  public async execute(): Promise<Appointment[]> {
-    const response = await this.prisma.appointment.findMany({
-      include: { patient: true },
-    });
-
-    return response;
-  }
+		return response;
+	}
 }

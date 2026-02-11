@@ -1,19 +1,16 @@
-import { Company, PrismaClient } from "@prisma/client";
+import type { Company } from "../../../prisma/generated/client";
+import { prisma } from "../../database/client";
 
 export class GetCompanyService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute(id: number | string): Promise<Company | null> {
+		const result = await this.prisma.company.findFirst({
+			where: {
+				id: Number(id),
+			},
+		});
 
-  public async execute(id: number | string): Promise<Company | null> {
-    const result = await this.prisma.company.findFirst({
-      where: {
-        id: Number(id),
-      },
-    });
-
-    return result;
-  }
+		return result;
+	}
 }

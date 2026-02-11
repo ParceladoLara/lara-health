@@ -1,27 +1,28 @@
-import { Address, Company, Patient, PrismaClient } from "@prisma/client";
+import type {
+	Address,
+	Company,
+	Patient,
+} from "../../../prisma/generated/client";
+import { prisma } from "../../database/client";
 
 export type PatientWithRelations = Patient & {
-  address: Address;
-  company: Company;
+	address: Address;
+	company: Company;
 };
 
 export class GetPatientService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute(
+		id: number | string,
+	): Promise<PatientWithRelations | null> {
+		const result = await this.prisma.patient.findFirst({
+			where: { id: Number(id) },
+			include: { company: true, address: true },
+		});
 
-  public async execute(
-    id: number | string
-  ): Promise<PatientWithRelations | null> {
-    const result = await this.prisma.patient.findFirst({
-      where: { id: Number(id) },
-      include: { company: true, address: true },
-    });
+		if (!result) return null;
 
-    if (!result) return null;
-
-    return result;
-  }
+		return result;
+	}
 }

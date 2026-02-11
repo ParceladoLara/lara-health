@@ -1,18 +1,17 @@
-datasource db {
-  provider = "postgresql"
-  url      = "postgres://postgres:123456@localhost:5432/lara_health"
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
 }
 
-generator client {
-  provider = "prisma-client-js"
+datasource db {
+  provider = "postgresql"
 }
 
 model Company {
-  id     Int     @id @default(autoincrement())
-  cnpj   String  @unique
-  name   String
-  apiKey String?
-
+  id        Int        @id @default(autoincrement())
+  cnpj      String     @unique
+  name      String
+  apiKey    String?
   employees Employee[]
   patients  Patient[]
 }
@@ -24,47 +23,41 @@ model Employee {
   cpf         String
   dateOfBirth String
   lara_id     String?
-
-  company_id Int
-  company    Company @relation(fields: [company_id], references: [id])
+  company_id  Int
+  company     Company @relation(fields: [company_id], references: [id])
 }
 
 model Address {
-  id         Int     @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   zip        String
   city       String
   state      String
   street     String
   number     Int
   complement String?
-
-  patients Patient[]
+  patients   Patient[]
 }
 
 model Patient {
-  id             Int     @id @default(autoincrement())
+  id             Int           @id @default(autoincrement())
   name           String
   cellphone      String
   cpf            String
   dateOfBirth    String
   email          String
   collection_url String?
-
-  company_id Int
-  company    Company @relation(fields: [company_id], references: [id])
-
-  address_id Int
-  address    Address @relation(fields: [address_id], references: [id])
-
-  appointments Appointment[]
+  company_id     Int
+  address_id     Int
+  appointments   Appointment[]
+  address        Address       @relation(fields: [address_id], references: [id])
+  company        Company       @relation(fields: [company_id], references: [id])
 }
 
 model Appointment {
-  id         Int     @id @default(autoincrement())
-  value      Int
-  patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
-
+  id                   Int     @id @default(autoincrement())
+  value                Int
+  patient_id           Int
   lara_proposal_id     String?
   lara_proposal_status String?
+  patient              Patient @relation(fields: [patient_id], references: [id])
 }

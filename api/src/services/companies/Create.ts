@@ -1,25 +1,21 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../database/client";
 
 export interface CreateCompanyDTO {
-  cnpj: string;
-  name: string;
+	cnpj: string;
+	name: string;
 }
 
 export class CreateCompanyService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute({ cnpj, name }: CreateCompanyDTO) {
+		const company = await this.prisma.company.create({
+			data: {
+				cnpj,
+				name,
+			},
+		});
 
-  public async execute({ cnpj, name }: CreateCompanyDTO) {
-    const company = await this.prisma.company.create({
-      data: {
-        cnpj,
-        name,
-      },
-    });
-
-    return company;
-  }
+		return company;
+	}
 }

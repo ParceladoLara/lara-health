@@ -1,36 +1,33 @@
-import { Patient, PrismaClient } from "@prisma/client";
+import type { Patient } from "../../../prisma/generated/client";
+import { prisma } from "../../database/client";
 
 export interface CreatePatientDTO
-  extends Omit<
-    Patient,
-    "address_id" | "id" | "collection_url" | "company_id"
-  > {}
+	extends Omit<
+		Patient,
+		"address_id" | "id" | "collection_url" | "company_id"
+	> {}
 
 export class CreatePatientService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute(data: CreatePatientDTO) {
+		const result = await this.prisma.patient.create({
+			data: {
+				name: data.name,
+				cellphone: data.cellphone,
+				cpf: data.cpf,
+				dateOfBirth: data.dateOfBirth,
+				email: data.email,
+				collection_url: null,
+				company: {
+					connect: { id: 1 },
+				},
+				address: {
+					connect: { id: 1 },
+				},
+			},
+		});
 
-  public async execute(data: CreatePatientDTO) {
-    const result = await this.prisma.patient.create({
-      data: {
-        name: data.name,
-        cellphone: data.cellphone,
-        cpf: data.cpf,
-        dateOfBirth: data.dateOfBirth,
-        email: data.email,
-        collection_url: null,
-        company: {
-          connect: { id: 1 },
-        },
-        address: {
-          connect: { id: 1 },
-        },
-      },
-    });
-
-    return result;
-  }
+		return result;
+	}
 }

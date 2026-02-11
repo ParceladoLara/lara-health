@@ -1,26 +1,21 @@
-import { PrismaClient } from "@prisma/client";
-
+import { prisma } from "../../database/client";
 export interface UpdateAppointmentDTO {
-  id: number;
-  lara_proposal_status?: string;
-  lara_proposal_id?: string;
+	id: number;
+	lara_proposal_status?: string;
+	lara_proposal_id?: string;
 }
 
 export class UpdateAppointmentService {
-  private readonly prisma: PrismaClient;
+	private readonly prisma = prisma;
 
-  constructor(prisma: PrismaClient = new PrismaClient()) {
-    this.prisma = prisma;
-  }
+	public async execute({ id, ...rest }: UpdateAppointmentDTO) {
+		const result = await this.prisma.appointment.update({
+			where: {
+				id: id,
+			},
+			data: { ...rest },
+		});
 
-  public async execute({ id, ...rest }: UpdateAppointmentDTO) {
-    const result = await this.prisma.appointment.update({
-      where: {
-        id: id,
-      },
-      data: { ...rest },
-    });
-
-    return result;
-  }
+		return result;
+	}
 }
