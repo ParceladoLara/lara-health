@@ -8,7 +8,7 @@ async function main() {
 		create: {
 			id: 1,
 			cnpj: "36931849000126",
-			name: "Memhis & Pay",
+			name: "Memphis & Pay",
 			apiKey: "80fcf64e-bd3b-4835-afea-954b83ecb0c2",
 		},
 	});

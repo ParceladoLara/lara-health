@@ -1,4 +1,4 @@
-import { AddressType } from "./AddressType";
+import type { AddressType } from "./AddressType";
 
 export interface CompleteProposalBodyType {
   installments: number;

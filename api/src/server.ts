@@ -1,17 +1,12 @@
 import cors from "cors";
-import dotenv from "dotenv";
 import express, { type Express } from "express";
 import { LaraAPI } from "./api/laraAPI";
-import "./database/seed";
 import { AppointmentsRouter } from "./routes/appointments";
 import { CompaniesRouter } from "./routes/companies";
 import { EmployeesRouter } from "./routes/employees";
 import { GatekeeperRouter } from "./routes/gatekeeper";
 import { LaraRouter } from "./routes/lara";
 import { PatientsRouter } from "./routes/patients";
-
-const env = process.env.NODE_ENV || "dev";
-dotenv.config({ path: `.env.${env}` });
 
 export const laraClient = new LaraAPI(process.env.LARA_API!);
 
@@ -44,7 +39,6 @@ export class Server {
   public start(): void {
     this.app.listen(this.port, () => {
       console.log(`Server running on: http://localhost:${this.port}`);
-      console.log(`Loaded environment variables from .env.${env}`);
     });
   }
 }

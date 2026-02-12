@@ -1,4 +1,4 @@
-import { ProposalCustomer } from "./ProposalCustomer";
+import type { ProposalCustomer } from "./ProposalCustomer";
 import { ProposalStatus } from "./ProposalStatus";
 
 export interface CompleteProposalResponseType {

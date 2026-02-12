@@ -6,18 +6,20 @@ Uma plataforma abrangente de gestão de saúde construída com tecnologias web m
 
 A plataforma possui integração completa com os serviços financeiros da Lara:
 
-### Fluxo de Propostas Financeiras:
+### Fluxo de Propostas Financeiras
+
 1. **Inicialização**: Criação de proposta financeira através da API Lara
 2. **Cálculo de Parcelas**: Uso de módulo WASM para cálculos de planos de pagamento
 3. **Finalização**: Conclusão do contrato e envio via WhatsApp
 4. **Rastreamento**: Monitoramento do status da proposta durante todo o processo
 
-### Componentes Principais:
+### Componentes Principais
+
 - **Cliente Lara API**: Comunicação com serviços externos da Lara
 - **Autenticação JWT**: Acesso seguro à API Lara com tokens de empresa
 - **Módulo WASM**: Cálculos de alta performance para planos de pagamento
 - **Gestão de Status**: Controle do estado das propostas nos registros de consultas
-- **Gestão de Status**: Controle do estado dos contratos ao processar os webhooks 
+- **Gestão de Status**: Controle do estado dos contratos ao processar os webhooks
 
 ## 🏗️ Arquitetura
 
@@ -36,17 +38,20 @@ Este projeto está estruturado como um monorepo PNPM workspace com dois pacotes 
 ### Instalação
 
 1. Clone o repositório:
+
 ```bash
 git clone <repository-url>
 cd lara-health
 ```
 
 2. Instale as dependências:
+
 ```bash
 pnpm install
 ```
 
 3. Inicie o ambiente de desenvolvimento:
+
 ```bash
 pnpm start
 ```
@@ -55,7 +60,7 @@ Isso iniciará tanto o servidor da API (porta 3000) quanto o servidor de desenvo
 
 ## 📁 Estrutura do Projeto
 
-```
+```text
 lara-health/
 ├── api/                     # API Backend
 │   ├── src/
@@ -83,6 +88,7 @@ lara-health/
 ## 🛠️ Stack Tecnológica
 
 ### Backend (API)
+
 - **Runtime**: Node.js com TypeScript
 - **Framework**: Express.js
 - **Banco de Dados**: MySQL com Prisma ORM
@@ -92,6 +98,7 @@ lara-health/
 - **Desenvolvimento**: ts-node-dev para hot reloading
 
 ### Frontend
+
 - **Framework**: React 18 com TypeScript
 - **Ferramenta de Build**: Vite
 - **Roteamento**: TanStack Router
@@ -106,6 +113,7 @@ lara-health/
 ## 🏥 Funcionalidades
 
 ### Funcionalidade Principal
+
 - **Gestão de Empresas**: Criar e gerenciar organizações de saúde com chaves API para integração Lara
 - **Gestão de Funcionários**: Gerenciar registros e dados de saúde dos funcionários com vinculação ao Lara ID
 - **Gestão de Pacientes**: Sistema completo de cadastro de pacientes com informações pessoais e endereços
@@ -117,6 +125,7 @@ lara-health/
 - **Tabelas de Dados**: Visualizações de dados de saúde ordenáveis e filtráveis
 
 ### Endpoints da API
+
 - **Empresas**: `/company` - Operações CRUD de empresas
 - **Funcionários**: `/employee`, `/employees` - Gestão de funcionários
 - **Pacientes**: `/patient`, `/patients` - Gestão completa de pacientes
@@ -126,6 +135,7 @@ lara-health/
 - **Webhooks**: Integrações com sistemas externos
 
 ### Funcionalidades do Frontend
+
 - Dashboard responsivo com métricas de saúde
 - Interface completa para gestão de pacientes e consultas
 - Fluxo de propostas Lara com visualização de planos de pagamento
@@ -141,11 +151,13 @@ lara-health/
 ### Configuração de Ambiente
 
 A API suporta múltiplos ambientes:
+
 - `dev` - Ambiente de desenvolvimento
 - `stage` - Ambiente de homologação
 - `prod` - Ambiente de produção
 
 Crie arquivos `.env` específicos para cada ambiente no diretório da API:
+
 - `.env.dev`
 - `.env.stage`
 - `.env.prod`
@@ -153,11 +165,13 @@ Crie arquivos `.env` específicos para cada ambiente no diretório da API:
 ### Scripts Disponíveis
 
 #### Nível Raiz
+
 ```bash
 pnpm start          # Iniciar tanto API quanto frontend
 ```
 
 #### API (`/api`)
+
 ```bash
 pnpm start:dev      # Iniciar API em modo desenvolvimento
 pnpm start:stage    # Iniciar API em modo homologação
@@ -169,6 +183,7 @@ pnpm prisma:studio  # Abrir Prisma Studio para visualização do banco
 ```
 
 #### Frontend (`/app`)
+
 ```bash
 pnpm dev            # Iniciar servidor de desenvolvimento
 pnpm build          # Build para produção
@@ -179,6 +194,7 @@ pnpm lint           # Executar ESLint
 ### Banco de Dados
 
 O projeto usa MySQL com Prisma ORM para armazenamento de dados:
+
 - **ORM**: Prisma para operações type-safe no banco
 - **Migrações**: Sistema de migrações do Prisma
 - **Schema**: Definido em `api/prisma/schema.prisma`
@@ -193,6 +209,7 @@ O projeto usa MySQL com Prisma ORM para armazenamento de dados:
 ## 🔐 Autenticação
 
 A plataforma usa autenticação baseada em JWT com integração Lara:
+
 - Endpoint de login fornece tokens de acesso
 - Rotas protegidas requerem tokens JWT válidos
 - Suporta onboarding de usuários e acesso à plataforma
@@ -202,6 +219,7 @@ A plataforma usa autenticação baseada em JWT com integração Lara:
 ## 🎨 Componentes UI
 
 O frontend inclui um conjunto abrangente de componentes UI:
+
 - **Navegação**: Barra lateral, breadcrumbs, cabeçalhos
 - **Exibição de Dados**: Tabelas, gráficos, cards, badges
 - **Formulários**: Inputs, selects, checkboxes, botões
@@ -212,13 +230,15 @@ O frontend inclui um conjunto abrangente de componentes UI:
 
 A plataforma possui integração completa com os serviços financeiros da Lara:
 
-### Fluxo de Propostas Financeiras:
+### Fluxo de Propostas Financeiras
+
 1. **Inicialização**: Criação de proposta financeira através da API Lara
 2. **Cálculo de Parcelas**: Uso de módulo WASM para cálculos de planos de pagamento
 3. **Finalização**: Conclusão do contrato e envio via WhatsApp
 4. **Rastreamento**: Monitoramento do status da proposta durante todo o processo
 
-### Componentes Principais:
+### Componentes Principais
+
 - **Cliente Lara API**: Comunicação com serviços externos da Lara
 - **Autenticação JWT**: Acesso seguro à API com tokens de empresa
 - **Módulo WASM**: Cálculos de alta performance para planos de pagamento
