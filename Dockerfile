@@ -4,13 +4,38 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 FROM base AS build
-
 ARG APP
+ENV APP=${APP}
+
+ARG ENV
+ENV ENV=${ENV}
+
+ARG INFISICAL_EMAIL
+ENV INFISICAL_EMAIL=${INFISICAL_EMAIL}
+
+ARG INFISICAL_PASSWORD
+ENV INFISICAL_PASSWORD=${INFISICAL_PASSWORD}
+
+ARG INFISICAL_ORGANIZATION_ID
+ENV INFISICAL_ORGANIZATION_ID=${INFISICAL_ORGANIZATION_ID}
+
+ARG INFISICAL_API_URL
+ENV INFISICAL_API_URL=${INFISICAL_API_URL}
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm install --frozen-lockfile
+# Install Infisical CLI
+RUN apt-get update && apt-get install -y bash curl && curl -1sLf \
+  'https://artifacts-cli.infisical.com/setup.deb.sh' |  bash \
+  &&  apt-get update && apt-get install -y infisical
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm add turbo --global
+
+# Login to Infisical and build (the build script in package.json already calls infisical)
+RUN infisical login
+
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm --if-present --filter=${APP} build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --filter=${APP} --prod /prod/${APP} --legacy
 

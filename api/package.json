@@ -5,13 +5,13 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start:dev": "tsx --watch --env-file=.env.dev src/server.ts",
-		"db:generate": "pnpm prisma generate",
-		"db:push": "pnpm prisma db push",
-		"compose": "docker compose up -d",
-		"prisma:studio": "pnpm prisma studio",
-		"start": "tsx src/server.ts",
-		"seed": "prisma db seed"
+		"start:dev": "infisical run -- tsx --watch src/server.ts",
+		"db:generate": "infisical run -- pnpm prisma generate",
+		"db:push": "infisical run -- pnpm prisma db push",
+		"compose": "infisical run -- docker compose up -d",
+		"prisma:studio": "infisical run -- pnpm prisma studio",
+		"start": "infisical run -- tsx src/server.ts",
+		"seed": "infisical run -- prisma db seed"
 	},
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.4.0",
