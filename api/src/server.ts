@@ -23,7 +23,9 @@ export class Server {
   }
 
   private setupMiddleware(): void {
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: true
+    }));
     this.app.use(express.json());
   }
 

@@ -10,7 +10,8 @@
 		"db:push": "pnpm prisma db push",
 		"compose": "docker compose up -d",
 		"prisma:studio": "pnpm prisma studio",
-		"start": "tsx src/server.ts"
+		"start": "tsx src/server.ts",
+		"seed": "prisma db seed"
 	},
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.4.0",

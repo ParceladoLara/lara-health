@@ -1,4 +1,4 @@
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
 export class JWTIssuer {
@@ -29,6 +29,7 @@ export class JWTIssuer {
 			exp: now + this.expirationSeconds,
 			aud: jwtAud,
 		};
+
 
 		return jwt.sign(jwtClaim, this.privateKey, {
 			algorithm: "RS256",
