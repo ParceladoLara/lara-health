@@ -1,4 +1,4 @@
-name: Health APP - Deployment
+name: Lara Health APP - Deployment
 on:
   push:
     branches: [main]
@@ -49,6 +49,9 @@ jobs:
           file: Dockerfile
           build-args: |
             APP=${{ env.IMAGE_NAME }}
+          # Injeta as variáveis de ambiente do Frontend (Vite) de forma segura no build
+          secrets: |
+            "dotenv=${{ secrets.APP_BUILD_ENV_FILE }}"
           target: ${{ env.APP_TYPE_BUILD_TARGET }}
           tags: ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/lara-health-${{ env.IMAGE_NAME }}:latest
           push: true

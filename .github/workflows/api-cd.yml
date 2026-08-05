@@ -1,4 +1,4 @@
-name: Health API - Deployment
+name: Lara Health API - Deployment
 on:
   push:
     branches: [main]
@@ -49,11 +49,9 @@ jobs:
           file: Dockerfile
           build-args: |
             APP=${{ env.IMAGE_NAME }}
-            ENV=prod
-            INFISICAL_EMAIL=${{ secrets.INFISICAL_EMAIL }}
-            INFISICAL_PASSWORD=${{ secrets.INFISICAL_PASSWORD }}
-            INFISICAL_ORGANIZATION_ID=${{ secrets.INFISICAL_ORGANIZATION_ID }}
-            INFISICAL_API_URL=${{ secrets.INFISICAL_API_URL }}
+          # Injeta as variáveis de ambiente com segurança durante o build
+          secrets: |
+            "dotenv=${{ secrets.BUILD_ENV_FILE }}"
           target: ${{ env.APP_TYPE_BUILD_TARGET }}
           tags: ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/lara-health-${{ env.IMAGE_NAME }}:latest
           push: true
