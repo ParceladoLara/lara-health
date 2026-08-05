@@ -5,13 +5,13 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start:dev": "infisical run -- tsx --watch src/server.ts",
-		"db:generate": "infisical run -- pnpm prisma generate",
-		"db:push": "infisical run -- pnpm prisma db push",
-		"compose": "infisical run -- docker compose up -d",
-		"prisma:studio": "infisical run -- pnpm prisma studio",
-		"start": "infisical run -- tsx src/server.ts",
-		"seed": "infisical run -- prisma db seed"
+		"start:dev": "tsx --watch --env-file=.env src/server.ts",
+		"db:generate": "dotenv -e .env -- pnpm prisma generate",
+		"db:push": "dotenv -e .env -- pnpm prisma db push",
+		"compose": "docker compose up -d",
+		"prisma:studio": "pnpm prisma studio",
+		"start": "tsx src/server.ts",
+		"seed": "dotenv -e .env -- prisma db seed"
 	},
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.4.0",
@@ -22,8 +22,8 @@
 		"jsonwebtoken": "^9.0.3",
 		"pg": "^8.18.0",
 		"prisma": "^7.4.0",
-		"uuid": "^13.0.0",
-		"tsx": "4.21.0"
+		"tsx": "4.21.0",
+		"uuid": "^13.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.15",
@@ -33,6 +33,7 @@
 		"@types/jsonwebtoken": "^9.0.10",
 		"@types/node": "^24.10.13",
 		"@types/pg": "^8.16.0",
+		"dotenv-cli": "^11.0.0",
 		"typescript": "^5.9.3"
 	}
 }

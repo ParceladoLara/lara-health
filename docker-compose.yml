@@ -9,9 +9,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      # Updated mount path for Postgres 18+
+      - postgres_data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d lara-v2-test"]
+      # Fixed to match the POSTGRES_DB name
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lara_health"]
       interval: 10s
       timeout: 5s
       retries: 5

@@ -1,6 +1,9 @@
 {
   "name": "embedded-example-monorepo",
   "private": true,
+  "scripts": {
+    "start": "concurrently \"pnpm --filter api run start:dev\" \"pnpm --filter app run dev\""
+  },
   "devDependencies": {
     "turbo": "^2.8.11"
   },

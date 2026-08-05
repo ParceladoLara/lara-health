@@ -12,13 +12,13 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "./prismaNamespace.js"
+import type * as Prisma from "./prismaNamespace"
 
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.4.0",
-  "engineVersion": "ab56fe763f921d033a6c195e7ddeb3e255bdbb57",
+  "clientVersion": "7.4.1",
+  "engineVersion": "55ae170b1ced7fc6ed07a15f110549408c501bb3",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Company {\n  id        Int        @id @default(autoincrement())\n  cnpj      String     @unique\n  name      String\n  apiKey    String?\n  employees Employee[]\n  patients  Patient[]\n}\n\nmodel Employee {\n  id          Int     @id @default(autoincrement())\n  name        String\n  cellphone   String\n  cpf         String\n  dateOfBirth String\n  lara_id     String?\n  company_id  Int\n  company     Company @relation(fields: [company_id], references: [id])\n}\n\nmodel Address {\n  id         Int       @id @default(autoincrement())\n  zip        String\n  city       String\n  state      String\n  street     String\n  number     Int\n  complement String?\n  patients   Patient[]\n}\n\nmodel Patient {\n  id             Int           @id @default(autoincrement())\n  name           String\n  cellphone      String\n  cpf            String\n  dateOfBirth    String\n  email          String\n  collection_url String?\n  company_id     Int\n  address_id     Int\n  appointments   Appointment[]\n  address        Address       @relation(fields: [address_id], references: [id])\n  company        Company       @relation(fields: [company_id], references: [id])\n}\n\nmodel Appointment {\n  id                   Int     @id @default(autoincrement())\n  value                Int\n  patient_id           Int\n  lara_proposal_id     String?\n  lara_proposal_status String?\n  patient              Patient @relation(fields: [patient_id], references: [id])\n}\n",
   "runtimeDataModel": {
@@ -174,7 +174,7 @@ export interface PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
