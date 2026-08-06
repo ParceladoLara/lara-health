@@ -22,11 +22,12 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --filter=${APP} --
 FROM base AS express
 ARG APP
 ENV CI=true
+
 COPY --chown=node:node --from=build /prod/${APP} /prod/${APP}
 WORKDIR /prod/${APP}
 USER node
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["npm", "run", "start"]
 
 FROM nginx:alpine AS spa
 ARG APP

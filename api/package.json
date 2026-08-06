@@ -10,7 +10,7 @@
 		"db:push": "infisical run -- pnpm prisma db push",
 		"compose": "infisical run -- docker compose up -d",
 		"prisma:studio": "infisical run -- pnpm prisma studio",
-		"start": "infisical run -- tsx src/server.ts",
+		"start": "tsx src/server.ts",
 		"seed": "infisical run -- prisma db seed"
 	},
 	"dependencies": {
@@ -35,5 +35,12 @@
 		"@types/pg": "^8.16.0",
 		"dotenv-cli": "^11.0.0",
 		"typescript": "^5.9.3"
-	}
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+		"@prisma/engines",
+		"prisma",
+		"esbuild"
+		]
+  }
 }
