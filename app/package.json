@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start:dev": "infisical run -- vite",
-    "build": "infisical run -- tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "preview": "infisical run -- vite preview",
     "tanstack:generate": "infisical run -- tanstack router generate"
   },
