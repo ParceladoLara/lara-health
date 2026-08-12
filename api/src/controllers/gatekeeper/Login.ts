@@ -88,7 +88,7 @@ export class GatekeeperController {
 			);
 
 			return res.status(200).json({
-				url: `${process.env.PLATFORM_URL}?credential=${jwt}`,
+				url: `${process.env.PLATFORM_URL}?credentials=${jwt}`,
 			});
 		} catch (error) {
 			console.error("ERRO REAL NO BACKEND:", error);
